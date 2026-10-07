@@ -1,4 +1,5 @@
 package com.example.proyectokaiju.repository
+
 import com.example.proyectokaiju.model.*
 
 object DatosDePrueba {

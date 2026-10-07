@@ -1,4 +1,4 @@
-   // en InventarioViewModel
+package com.example.proyectokaiju.model
 
 enum class TipoMovimiento { ENTRADA, SALIDA_VENTA, SALIDA_CONSUMO, AJUSTE }
 
