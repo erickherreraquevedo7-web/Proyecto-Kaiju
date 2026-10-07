@@ -1,5 +1,3 @@
-
-
 package com.example.proyectokaiju.navigation
 
 import androidx.compose.foundation.layout.Box
@@ -24,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.proyectokaiju.ui.screen.PantallaCatalogo
+import com.example.proyectokaiju.ui.screen.PantallaFormularioProducto
 import com.example.proyectokaiju.viewmodel.InventarioViewModel
 
 @Composable
@@ -68,12 +67,20 @@ fun AppNavHost(viewModel: InventarioViewModel = viewModel()) {
         ) {
             composable(Rutas.Login.ruta) { PantallaTitulo("Login") }
             composable(Rutas.Catalogo.ruta) {
-                PantallaCatalogo(viewModel) { codigo ->
-                    navController.navigate(Rutas.Detalle.crear(codigo))
-                }
+                PantallaCatalogo(
+                    viewModel = viewModel,
+                    onProductoClick = { codigo ->
+                        navController.navigate(Rutas.Detalle.crear(codigo))
+                    },
+                    onAgregarClick = {
+                        navController.navigate(Rutas.FormularioProducto.ruta)
+                    }
+                )
             }
             composable(Rutas.Detalle.ruta) { PantallaTitulo("Detalle del producto") }
-            composable(Rutas.FormularioProducto.ruta) { PantallaTitulo("Formulario de producto") }
+            composable(Rutas.FormularioProducto.ruta) {
+                PantallaFormularioProducto(viewModel) { navController.popBackStack() }
+            }
             composable(Rutas.Movimiento.ruta) { PantallaTitulo("Registrar movimiento") }
             composable(Rutas.Alertas.ruta) { PantallaTitulo("Alertas de stock") }
         }
