@@ -23,6 +23,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.proyectokaiju.ui.screen.PantallaCatalogo
 import com.example.proyectokaiju.ui.screen.PantallaFormularioProducto
+import com.example.proyectokaiju.ui.screen.PantallaMovimiento
 import com.example.proyectokaiju.viewmodel.InventarioViewModel
 
 @Composable
@@ -81,7 +82,11 @@ fun AppNavHost(viewModel: InventarioViewModel = viewModel()) {
             composable(Rutas.FormularioProducto.ruta) {
                 PantallaFormularioProducto(viewModel) { navController.popBackStack() }
             }
-            composable(Rutas.Movimiento.ruta) { PantallaTitulo("Registrar movimiento") }
+            composable(Rutas.Movimiento.ruta) {
+                PantallaMovimiento(viewModel) {
+                    navController.navigate(Rutas.Catalogo.ruta) { launchSingleTop = true }
+                }
+            }
             composable(Rutas.Alertas.ruta) { PantallaTitulo("Alertas de stock") }
         }
     }

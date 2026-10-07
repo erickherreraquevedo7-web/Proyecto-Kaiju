@@ -1,4 +1,5 @@
 package com.example.proyectokaiju.repository
+
 import com.example.proyectokaiju.model.*
 
 class InventarioRepository {
@@ -6,8 +7,9 @@ class InventarioRepository {
     private val movimientos = mutableListOf<Movimiento>()
 
     fun obtenerProductos(): List<Producto> = productos.toList()
+
     fun obtenerMovimientos(codigo: String) =
-        movimientos.filter { it.codigoProducto == codigo }.sortedByDescending { it.fecha }
+        movimientos.filter { it.codigoProducto == codigo }.sortedByDescending { it.id }
 
     fun guardarProducto(p: Producto) {
         val i = productos.indexOfFirst { it.codigo == p.codigo }
@@ -15,5 +17,8 @@ class InventarioRepository {
     }
 
     fun agregarMovimiento(m: Movimiento) { movimientos.add(m) }
+
+    fun siguienteIdMovimiento(): Int = (movimientos.maxOfOrNull { it.id } ?: 0) + 1
+
     fun usuarios() = DatosDePrueba.usuarios
 }
